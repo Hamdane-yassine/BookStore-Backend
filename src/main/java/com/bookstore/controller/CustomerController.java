@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
