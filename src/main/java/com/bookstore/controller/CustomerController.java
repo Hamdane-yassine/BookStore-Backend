@@ -5,7 +5,6 @@ import com.bookstore.secured.service.CustomerServiceSecured;
 import com.bookstore.unsecured.model.Customer;
 import com.bookstore.unsecured.service.CustomerServiceUnsecured;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +26,9 @@ public class CustomerController {
         return new ResponseEntity<>(customerServiceUnsecured.addCustomer(customer), HttpStatus.OK);
     }
 
-    @GetMapping("/unsecured/borrows")
-    public List<Customer> getCustomerBorrowsByEmailUnsecured(@RequestParam String email) {
-        return customerServiceUnsecured.getCustomerBorrowsByEmail(email);
+    @PostMapping("/unsecured/borrows")
+    public List<Customer> getCustomerBorrowsByEmailUnsecured(@RequestBody com.bookstore.unsecured.dto.BorrowsRequest borrowsRequest) {
+        return customerServiceUnsecured.getCustomerBorrowsByEmail(borrowsRequest.getEmail());
     }
 
     @PostMapping("/secured")
@@ -37,9 +36,9 @@ public class CustomerController {
         return new ResponseEntity<>(customerServiceSecured.addCustomer(customerSecured), HttpStatus.OK);
     }
 
-    @GetMapping("/secured/borrows")
-    public List<CustomerSecured> getCustomerBorrowsByEmailSecured(@Email @RequestParam String email) {
-        return customerServiceSecured.getCustomerBorrowsByEmail(email);
+    @PostMapping("/secured/borrows")
+    public List<CustomerSecured> getCustomerBorrowsByEmailSecured(@RequestBody com.bookstore.secured.dto.BorrowsRequest borrowsRequest) {
+        return customerServiceSecured.getCustomerBorrowsByEmail(borrowsRequest.getEmail());
     }
 }
 
