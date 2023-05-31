@@ -27,7 +27,6 @@ public class CustomersManager {
         String sql = "SELECT customers.*, books.name as book_name FROM customers "
                 + "LEFT JOIN books ON customers.book_id = books.id "
                 + "WHERE customers.email = '" + email + "'";
-
         return getCustomers(sql);
     }
 
